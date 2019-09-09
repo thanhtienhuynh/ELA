@@ -16,4 +16,7 @@ public interface AccountRepository extends JpaRepository<AccountEntity, Integer>
 
     List<AccountEntity> findAllByStatusOrderByUserName(String status);
 
+    List<AccountEntity> findAllByRoleId(int id);
+
+
 }

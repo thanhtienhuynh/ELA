@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
+import static com.example.demo.MainConstant.*;
+
 
 @RestController
 public class AccountController {
@@ -31,7 +33,6 @@ public class AccountController {
             return new ResponseEntity(accountRepository.findAll(), HttpStatus.OK);
         }
     }
-
     @PostMapping("/account/create")
     public ResponseEntity signUpAccount(@RequestBody Map<String, String> body) {
         String userName = body.get("userName");
@@ -53,12 +54,12 @@ public class AccountController {
         accountEntity.setCreatedTime(DateTimeUtils.getCurrentTime());
         accountEntity.setPhone(phone);
         accountEntity.setPassword(password);
-        if (role.equalsIgnoreCase(MainConstant.ROLE_ADMIN)) {
-            accountEntity.setRoleId(3);
-        } else if (role.equalsIgnoreCase(MainConstant.ROLE_TEACHER)) {
-            accountEntity.setRoleId(1);
+        if (role.equalsIgnoreCase(ROLE_ADMIN)) {
+            accountEntity.setRoleId(ADMIN_ROLE_ID);
+        } else if (role.equalsIgnoreCase(ROLE_TEACHER)) {
+            accountEntity.setRoleId(TEACHER_ROLE_ID);
         } else {
-            accountEntity.setRoleId(2);
+            accountEntity.setRoleId(STUDENT_ROLE_ID);
         }
         return accountEntity;
     }
